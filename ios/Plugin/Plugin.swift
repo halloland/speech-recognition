@@ -33,6 +33,11 @@ public class SpeechRecognition: CAPPlugin {
         }
     }
 
+    @objc func listen(_ call: CAPPluginCall) {
+      call.isSaved = true
+      start(call)
+    }
+
     @objc func start(_ call: CAPPluginCall) {
         if (self.audioEngine != nil) {
             if (self.audioEngine!.isRunning) {
