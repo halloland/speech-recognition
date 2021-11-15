@@ -33,6 +33,11 @@ public class SpeechRecognition: CAPPlugin {
         }
     }
 
+    @objc func listen(_ call: CAPPluginCall) {
+        self.bridge?.saveCall(call)
+        start(call)
+    }
+
     @objc func start(_ call: CAPPluginCall) {
         if (self.audioEngine != nil) {
             if (self.audioEngine!.isRunning) {
@@ -134,7 +139,14 @@ public class SpeechRecognition: CAPPlugin {
                 self.recognitionRequest?.endAudio()
             }
 
-            call.resolve()
+            if let callbackId = call.getString("callbackId") {
+                if let savedCall = self.bridge?.savedCall(withID: callbackId) {
+                   self.bridge?.releaseCall(savedCall)
+                }
+                return call.resolve()
+            }
+
+            return call.reject("No callback ID")
         }
     }
 
