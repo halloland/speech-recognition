@@ -21,6 +21,9 @@ export class SpeechRecognitionWeb extends WebPlugin
   requestPermission(): Promise<void> {
     throw this.unimplemented("Method not implemented on web.");
   }
+  listen(): Promise<string> {
+    throw this.unimplemented("Method not implemented on web.");
+  }
 }
 
 const SpeechRecognition = new SpeechRecognitionWeb();
