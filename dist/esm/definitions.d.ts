@@ -1,5 +1,5 @@
 export declare type CallbackID = string;
-export declare type SpeechCallback = (result: { matches: String[] }) => void;
+export declare type SpeechCallback = (result: { matches: string[] }) => void;
 export interface SpeechRecognitionPlugin {
   available(): Promise<{
     available: boolean;
