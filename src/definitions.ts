@@ -1,14 +1,17 @@
 export type CallbackID = string;
-export type SpeechCallback = (matches: String[]) => void;
+export type SpeechCallback = (result: { matches: String[] }) => void;
 
 export interface SpeechRecognitionPlugin {
   available(): Promise<{ available: boolean }>;
   start(options?: UtteranceOptions): Promise<{ matches: String[] }>;
-  stop(options: {callbackId: string}): Promise<void>;
+  stop(options: { callbackId: string }): Promise<void>;
   getSupportedLanguages(): Promise<{ languages: any[] }>;
   hasPermission(): Promise<{ permission: boolean }>;
   requestPermission(): Promise<void>;
-  listen(options?: UtteranceOptions, callback?: SpeechCallback): Promise<CallbackID>;
+  listen(
+    options?: UtteranceOptions,
+    callback?: SpeechCallback
+  ): Promise<CallbackID>;
 }
 
 export interface UtteranceOptions {

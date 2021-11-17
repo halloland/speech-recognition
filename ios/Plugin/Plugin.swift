@@ -35,6 +35,7 @@ public class SpeechRecognition: CAPPlugin {
 
     @objc func listen(_ call: CAPPluginCall) {
         self.bridge?.saveCall(call)
+        call.keepAlive = true
         start(call)
     }
 
